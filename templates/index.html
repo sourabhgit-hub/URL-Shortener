@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Shortener Project</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    
+
+</head>
+<body onload="clearShortenLink()">
+
+<div class="container py-4 mx-auto">
+    <div class="row"><h1>Url Shortener</h1></div>
+    <form method="post">{% csrf_token%}
+        <div class="row">
+            <div class="col-auto"><label>Enter website link </label></div>
+            <div class="col-5"><input class="form-control" type="text" name="website-link"></div>
+            <div class="col-auto"><button class="btn btn-primary mb-3" type="submit">Submit</button></div>
+        </div>
+        
+        <div class="row">
+            <div class="col-auto">Shortened link</div>
+            <div class="ms-4 col-5"><input class= "form-control" type="text" value ="{{link}}" id="shortened-link"></div>
+            <div class="col-auto"><button class="btn btn-primary mb-3" onclick="copyLink()">Copy</button></div>
+        </div>
+    </form>
+</div>
+
+<script>
+    function copyLink() 
+    {
+        var copyText = document.getElementById("shortened-link").value;
+        copyText.select();
+        navigator.clipboard.writeText(copyText);
+        alert("Copied the text: " + copyText);
+    }
+    function clearShortenLink()
+    {
+        // alert("hello");
+        document.getElementsByTagName("input").value = '';
+    }
+</script>
+</body></html>
